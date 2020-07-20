@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrasi</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <a href="/">Home</a>
-    <a href="/account/login">Login</a>
-    <h2>Registration</h2>
+{% block header %}
+    <h1>Registrasi</h1>
+{% endblock header %}
+
+{% block nav %}
+    <a href="/">Home</a><br>    
+    <a href="/account/login">Login</a><br>    
+    <a href="/account/register">Register</a><br>    
+{% endblock nav %}
+
+{% block content %}
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -22,8 +25,7 @@
             {% endfor %}
         </p>
         {% endfor %}
-        <button type="submit">Sign up</button>
+        <button type="submit">Registrasi</button>
     </form>
+{% endblock content %}
 
-</body>
-</html>

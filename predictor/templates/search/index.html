@@ -1,13 +1,46 @@
-<form>
-    <h1>{{Title}}</h1>
-    {% for kitab in Kitabs%}
-        <h4>Nomor database : {{kitab.no_database}}</h4>
-        <h4>Kategori : {{kitab.kategori}}</h4>
-        <h4>Nama Kitab : {{kitab.nama_kitab}}</h4>
-        <h4>Pengarang : {{kitab.pengarang}}</h4>
-        <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
-        <h4>Teks Processing</h4>
-        <h4>{{kitab.teks_processing}}</h4>
-        <br>
-    {% endfor %}
-</form>
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Hasil Pencarian</h1>
+{% endblock header %}
+
+{% block nav %}
+    <a href="/">Home</a> <br>
+    {% if user.is_authenticated %}
+        <h4>{{user}}</h2>
+        <a href="/kitab">Upload Kitab</a> <br>
+        <a href="/search/review">Review Hasil Pencarian Dokumen</a><br>
+        <a href="/account/logout">Logout</a><br>    
+    {% else %}
+        <a href="/account/login">Login</a><br>    
+        <a href="/account/register">Register</a><br>   
+    {% endif %}   
+{% endblock nav %}
+
+{% block search %}
+    <form method="POST" action="/search">
+        {% csrf_token %}
+        <h1>Dual Lingual Information Retrieval Indonesia-Arab</h1>
+        <input type="text" name="textfield"  class="keyboardInput" style="width: 450px;">
+        <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css"> 
+        <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
+        <br><br> 
+        <button type="submit">Search</button>
+    </form>
+{% endblock search %}
+
+{% block content %}
+    <form>
+        {% for kitab in Kitabs%}
+            <h4>Nomor database : {{kitab.no_database}}</h4>
+            <h4>Kategori : {{kitab.kategori}}</h4>
+            <h4>Nama Kitab : {{kitab.nama_kitab}}</h4>
+            <h4>Pengarang : {{kitab.pengarang}}</h4>
+            <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
+            <h4>Teks Processing</h4>
+            <h4>{{kitab.teks_processing}}</h4>
+            <br>
+        {% endfor %}
+    </form>
+{% endblock content %}
+

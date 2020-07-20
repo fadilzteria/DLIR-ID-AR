@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Review Hasil Pencarian Dokumen</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block header %}
+    <h1>Review Hasil Pencarian Dokumen</h1>
+{% endblock header %}
+
+{% block nav %}
+    <a href="/">Home</a> <br>
+    <h4>{{user}}</h2>
+    <a href="/kitab">Upload Kitab</a> <br>
+    <a href="/search/review">Review Hasil Pencarian Dokumen</a><br>
+    <a href="/account/logout">Logout</a><br>
+{% endblock nav %}
+
+{% block content %}
     <form method="POST">
         {% csrf_token %}
         <table>
@@ -13,6 +21,4 @@
         <br>
         <button type="Submit">Kirim Review</button>
     </form>
-
-</body>
-</html>
+{% endblock content %}

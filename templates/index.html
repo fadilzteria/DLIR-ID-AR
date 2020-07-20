@@ -1,22 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DLIR</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block header %}
+    <h1>Home</h1>
+{% endblock header %}
+
+{% block nav %}
     <a href="/">Home</a> <br>
     {% if user.is_authenticated %}
         <h4>{{user}}</h2>
         <a href="/kitab">Upload Kitab</a> <br>
-        <a href="/search/review">Review Hasil Pencarian Dokumen</a><br>
         <a href="/account/logout">Logout</a><br>    
     {% else %}
         <a href="/account/login">Login</a><br>    
         <a href="/account/register">Register</a><br>    
     {% endif %}
-    
-    <form method="POST" action="/search">
+{% endblock nav %}
+
+{% block search %}
+    <form method="POST" action="/search/">
         {% csrf_token %}
         <h1>Dual Lingual Information Retrieval Indonesia-Arab</h1>
         <input type="text" name="textfield"  class="keyboardInput" style="width: 450px;">
@@ -25,6 +26,4 @@
         <br><br> 
         <button type="submit">Search</button>
     </form>
-
-</body>
-</html>
+{% endblock search %}

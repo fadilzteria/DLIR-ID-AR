@@ -1,0 +1,13 @@
+<form>
+    <h1>{{Title}}</h1>
+    {% for kitab in Kitabs%}
+        <h4>Nomor database : {{kitab.no_database}}</h4>
+        <h4>Kategori : {{kitab.kategori}}</h4>
+        <h4>Nama Kitab : {{kitab.nama_kitab}}</h4>
+        <h4>Pengarang : {{kitab.pengarang}}</h4>
+        <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
+        <h4>Teks Processing</h4>
+        <h4>{{kitab.teks_processing}}</h4>
+        <br>
+    {% endfor %}
+</form>

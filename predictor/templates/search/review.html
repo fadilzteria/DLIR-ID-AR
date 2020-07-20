@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Hasil Pencarian Dokumen</title>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{review_form.as_table}}
+        </table>
+        <br>
+        <button type="Submit">Kirim Review</button>
+    </form>
+
+</body>
+</html>

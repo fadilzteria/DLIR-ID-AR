@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Kitab</title>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{kitab_form.as_table}}
+        </table>
+        <br>
+        <button type="Submit">Upload</button>
+    </form>
+
+</body>
+</html>

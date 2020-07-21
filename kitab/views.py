@@ -14,6 +14,7 @@ def upload(request):
     if(request.method=="POST"):
         print(request.POST)
         UploadKitab.objects.create(
+            username = request.user,
             kategori = request.POST['kategori'],
             nama_kitab = request.POST['nama_kitab'],
             nama_pengarang = request.POST['nama_pengarang'],

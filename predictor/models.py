@@ -10,4 +10,17 @@ class Kitabs(models.Model):
     teks_processing = models.TextField()
 
     def __str__(self):
-        return "{}".format(self.no_database)
+        return "{}. {} {}".format(self.id, self.nama_kitab, self.no_halaman)
+    
+class Review(models.Model):
+    username = models.CharField(max_length=100)
+    query = models.CharField(max_length=100)
+    review = models.CharField(max_length=500)
+
+    CHOICE = [('Iya', 'Iya'), ('Tidak', 'Tidak')]
+
+    dokumen_relevan = models.BooleanField(default=False)
+    konfirmasi = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}. {}".format(self.id, self.query)

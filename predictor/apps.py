@@ -3,13 +3,16 @@ from django.conf import settings
 
 import os
 from sklearn.externals import joblib
+# from gensim.models import FastText
 
 class PredictorConfig(AppConfig):  
     name = 'predictor'  
     # path_df = os.path.join(settings.MODELS, 'df_total8.csv')
     path_tfidf = os.path.join(settings.MODELS, 'tfidf8.pkl')
     path_vectorizer = os.path.join(settings.MODELS, 'vectorizer8.pkl')
+    # path_modelFT = os.path.join(settings.MODELS, 'modelFT8.pkl')
 
-#     # df_total = pd.read_csv(path_df)
+    # df_total = pd.read_csv(path_df)
     tfidf_matrix = joblib.load(path_tfidf)
     tfidf_vectorizer = joblib.load(path_vectorizer)
+    # modelFT = joblib.load(path_modelFT)

@@ -1,8 +1,12 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
+from .forms import ReviewForm
+from .models import Review
 
 from .apps import PredictorConfig
+
 from .models import Kitabs
-from .forms import ReviewForm
 
 import os
 from sklearn.externals import joblib
@@ -23,6 +27,10 @@ def index(request):
     if request.method == 'POST':
         search_id = request.POST.get('textfield', None)
         print(search_id)
+
+        # exquery = request.POST.get('exquery')
+        # print(exquery)
+
         # preprocessing query
         NLTK_StopWords = stopwords.words('indonesian')
         NLTK_StopWords = set(NLTK_StopWords)
@@ -38,8 +46,8 @@ def index(request):
         for i in range (len(T)+1):
             ngrams = zip(*[T[i:] for i in range(i)])
             ngrams = [" ".join(ngram) for ngram in ngrams]
-            if (len(ngrams)!=0):
-                if (ngrams not in hasilQuery):
+            if(len(ngrams)!=0):
+                if(ngrams not in hasilQuery):
                     hasilQuery.append(ngrams)
 
         # query translation
@@ -53,8 +61,28 @@ def index(request):
                 hasilTranslate.append(translations.text)
         print ("Query Translation : ", hasilTranslate[-1])
         query = hasilTranslate[-1]
-        
+
+        exquery = request.POST.get('exquery', None)
+        print(exquery)
+
+        # Query Expansion
+        if(exquery=='Iya'):
+            print("Pakai Ekspansi Query")
+            # pq = PredictorConfig.modelFT.wv.most_similar(query)
+            # print(pq)
+            # words = []
+            # for i in range(4):
+            #     words.append(pq[i][0])
+            # words.append(query)
+            # print(words)
+            # query = []
+            # query.append(' '.join(words))
+
+            # query_vec = PredictorConfig.tfidf_vectorizer.transform(query)
+
+        # else:
         query_vec = PredictorConfig.tfidf_vectorizer.transform([query])
+        
         print(query_vec)
 
         results = cosine_similarity(PredictorConfig.tfidf_matrix,query_vec).reshape((-1,))
@@ -76,21 +104,6 @@ def index(request):
         #     # print("Teks           : ", document_text[i])
         #     print("(Score: %.4f)" % results[i])
 
-        #     response.update([('No ID Dokumen' + str(j), int(i)), 
-        #                     ("No Database" + str(j), int(PredictorConfig.df_total.iloc[i,0])),
-        #                     ("Kategori" + str(j), PredictorConfig.df_total.iloc[i,1]),
-        #                     ("Nama Kitab" + str(j), PredictorConfig.df_total.iloc[i,2]),
-        #                     ("Pengarang" + str(j), PredictorConfig.df_total.iloc[i,3]),
-        #                     ("No Halaman" + str(j), PredictorConfig.df_total.iloc[i,4]),
-        #                     ("Teks Processing" + str(j), PredictorConfig.df_total.iloc[i,5])])
-        #     # if(j==1):
-        #     #     response = {'NO_ID_Dokumen' : int(i),
-        #     #                 'Nomor_Database' : int(PredictorConfig.df_total.iloc[i,0]),
-        #     #                 'Nomor_Database' : PredictorConfig.df_total.iloc[i,1],
-        #     #                 'Nama_Kitab' : PredictorConfig.df_total.iloc[i,2],
-        #     #                 'Pengarang' : PredictorConfig.df_total.iloc[i,3],
-        #     #                 'No_Halaman' : PredictorConfig.df_total.iloc[i,4],
-        #     #                 'Teks_Processing' : PredictorConfig.df_total.iloc[i,5]}
         #     j += 1
 
         list_object = []
@@ -113,5 +126,19 @@ def review(request):
     context = {
         'review_form' : form_field,
     }
+
+    if(request.method=="POST"):
+        print(request.POST)
+        relevan = False
+        if(request.POST['relevan']=='Iya'):
+            relevan = True
+
+        Review.objects.create(
+            username = request.user,
+            query = request.POST['query'],
+            review = request.POST['review'],
+            dokumen_relevan = relevan
+        )
+        return HttpResponseRedirect("/")
 
     return render(request, 'search/review.html', context)

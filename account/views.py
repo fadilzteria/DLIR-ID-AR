@@ -25,8 +25,8 @@ def logins(request):
 
 # @login_required
 def register(request):
+    form = RegisterForm(request.POST or None)
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')

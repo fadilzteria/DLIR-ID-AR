@@ -18,9 +18,14 @@
 {% endblock nav %}
 
 {% block search %}
-    <form method="POST" action="/search">
+    <form method="POST" action="/search/">
         {% csrf_token %}
         <h1>Dual Lingual Information Retrieval Indonesia-Arab</h1>
+        <label for="exquery">Ekspansi Kueri</label>
+        <select id="exquery" name="exquery">
+            <option value="Tidak">Tidak</option>
+            <option value="Iya">Iya</option>
+        </select> <br> <br>
         <input type="text" name="textfield"  class="keyboardInput" style="width: 450px;">
         <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css"> 
         <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>

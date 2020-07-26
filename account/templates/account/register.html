@@ -1,28 +1,38 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>Registrasi</h1>
-{% endblock header %}
+{% load static %}
 
-{% block nav %}
-    <a href="/">Home</a><br>    
-    <a href="/account/login">Login</a><br>    
-    <a href="/account/register">Register</a><br>    
-{% endblock nav %}
+{% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+{% endblock head %}
+
+{% block styles %}
+    {% include "snippets/form_styles.html" %}
+    <link rel="stylesheet" type="text/css" href="{% static "account/css/styles.css" %}">
+{% endblock styles %}
+    
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-        <p>
-            {{ field.label_tag }}<br>
-            {{ field }}
-            {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
+    <div class="registration-form">
+        <form method="post">
+            {% csrf_token %}
+            <h1 style='text-align: center;'> Registrasi </h1>
+            <br>
+            <div class="form-icon" style='background-color: #32CD32;'>
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field }}
+                </div>
             {% endfor %}
-        </p>
-        {% endfor %}
-        <button type="submit">Registrasi</button>
-    </form>
+            <div class="form-group">
+                <button type="submit" class="btn btn-block register" style="background-color:#32CD32;">Registrasi</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
 

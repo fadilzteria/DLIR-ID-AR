@@ -1,21 +1,10 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>Hasil Pencarian</h1>
-{% endblock header %}
+{% load static %}
 
-{% block nav %}
-    <a href="/">Home</a> <br>
-    {% if user.is_authenticated %}
-        <h4>{{user}}</h2>
-        <a href="/kitab">Upload Kitab</a> <br>
-        <a href="/search/review">Review Hasil Pencarian Dokumen</a><br>
-        <a href="/account/logout">Logout</a><br>    
-    {% else %}
-        <a href="/account/login">Login</a><br>    
-        <a href="/account/register">Register</a><br>   
-    {% endif %}   
-{% endblock nav %}
+{% block styles %}
+    {% include "snippets/form_styles.html" %}
+{% endblock styles %}
 
 {% block search %}
     <form method="POST" action="/search/">

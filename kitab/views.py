@@ -8,6 +8,7 @@ def upload(request):
     form_field = KitabForm()
 
     context = {
+        'title' : "Upload Kitab | Kitab Ulama",
         'kitab_form' : form_field,
     }
 

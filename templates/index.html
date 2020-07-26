@@ -1,20 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block header %}
-    <h1>Home</h1>
-{% endblock header %}
-
-{% block nav %}
-    <a href="/">Home</a> <br>
-    {% if user.is_authenticated %}
-        <h4>{{user}}</h2>
-        <a href="/kitab">Upload Kitab</a> <br>
-        <a href="/account/logout">Logout</a><br>    
-    {% else %}
-        <a href="/account/login">Login</a><br>    
-        <a href="/account/register">Register</a><br>    
-    {% endif %}
-{% endblock nav %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/bootstrap.min.css" %}">
+{% endblock styles %}
 
 {% block search %}
     <form method="POST" action="/search/">

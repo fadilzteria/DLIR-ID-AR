@@ -18,10 +18,17 @@ def logins(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/')
+            context = {
+                'title': "Kitab Ulama",
+            }
+            return redirect('/', context)
     else:
         form = LoginForm()
-    return render(request, 'account/login.html', {'form': form})
+    context = {
+        'title': "Login | Kitab Ulama",
+        'form': form,
+    }
+    return render(request, 'account/login.html', context)
 
 # @login_required
 def register(request):
@@ -33,10 +40,17 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            context = {
+                'title': "Kitab Ulama",
+            }
+            return redirect('/', context)
     else:
         form = RegisterForm()
-    return render(request, 'account/register.html', {'form': form})
+    context = {
+        'title': "Registrasi | Kitab Ulama",
+        'form': form,
+    }
+    return render(request, 'account/register.html', context)
 
 def logout_view(request):
     logout(request)

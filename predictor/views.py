@@ -113,17 +113,21 @@ def index(request):
         for x in list_id:
             list_object.append(Kitabs.objects.get(id=x))
         context = {
-            'Title':'Koleksi Kitab',
+            'title': search_id + " | Hasil Pencarian Kitab Ulama",
             'Kitabs': list_object,
         }
         return render(request, 'search/index.html', context)
     else:
+        context = {
+            'title': 'Kitab Ulama',
+        }
         return render(request, 'index.html')
 
 def review(request):
     form_field = ReviewForm()
 
     context = {
+        'title' :'Review Hasil Pencarian Dokumen | Kitab Ulama',
         'review_form' : form_field,
     }
 

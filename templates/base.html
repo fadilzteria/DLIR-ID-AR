@@ -1,21 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Kitab Ulama</title>
-</head>
+    <head>
+        <title>{{title}}</title>
+        
+        {% block head %}
+        {% endblock head %}
 
-<body>
-    {% block nav %}
-    {% endblock nav %}
+        {% block styles %}
+        {% endblock styles %}
+        
+    </head>
 
-    {% block header %}
-    {% endblock header %}
-    
-    {% block search %}
-    {% endblock search %}
+    <body>
+        {% include "snippets/navbar.html" %}
+        
+        {% block search %}
+        {% endblock search %}
 
-    {% block content %}
-    {% endblock content %}
-    
-</body>
+        {% block content %}
+        {% endblock content %}
+        
+        {% include "snippets/scripts.html" %}
+
+    </body>
 </html>

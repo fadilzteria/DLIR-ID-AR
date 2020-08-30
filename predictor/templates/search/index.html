@@ -7,6 +7,7 @@
 {% endblock styles %}
 
 {% block search %}
+<div class="d-flex justify-content-center">
     <form method="POST" action="/search/">
         {% csrf_token %}
         <h1>Dual Lingual Information Retrieval Indonesia-Arab</h1>
@@ -21,20 +22,29 @@
         <br><br> 
         <button type="submit">Search</button>
     </form>
+</div>
 {% endblock search %}
 
 {% block content %}
+    <br>
+    <br>
     <form>
+
         {% for kitab in Kitabs%}
-            <h4>Nomor database : {{kitab.no_database}}</h4>
-            <h4>Kategori : {{kitab.kategori}}</h4>
-            <h4>Nama Kitab : {{kitab.nama_kitab}}</h4>
-            <h4>Pengarang : {{kitab.pengarang}}</h4>
-            <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
-            <h4>Teks Processing</h4>
-            <h4>{{kitab.teks_processing}}</h4>
-            <br>
+            <div class="jumbotron jumbotron-fluid" style="background-color: #90EE90;">
+		<div class="container">
+                <h4>Kategori : {{kitab.kategori}}</h4>
+                <h4>Nama Kitab : {{kitab.nama_kitab}}</h4>
+                <h4>Pengarang : {{kitab.pengarang}}</h4>
+                <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
+                <hr class="my-4">
+                <h4>Teks</h4>
+                <p>{{kitab.teks_processing}}</h4>
+                <br>
+		</div>
+            </div>
         {% endfor %}
     </form>
 {% endblock content %}
+
 

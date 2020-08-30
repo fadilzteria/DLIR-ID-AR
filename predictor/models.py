@@ -19,7 +19,7 @@ class Review(models.Model):
 
     CHOICE = [('Iya', 'Iya'), ('Tidak', 'Tidak')]
 
-    dokumen_relevan = models.BooleanField(default=False)
+    dokumen_relevan = models.IntegerField(default=0)
     konfirmasi = models.BooleanField(default=False)
 
     def __str__(self):

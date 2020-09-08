@@ -106,7 +106,7 @@ def index(request):
         list_id = results.argsort()[-10:][::-1]
         list_id = [x+1 for x in list_id]
         for x in list_id:
-            list_object.append(Kitabs.objects.get(id=x))
+            list_object.append(Kitabs.objects.filter(id=x))
         
         return list_object
 

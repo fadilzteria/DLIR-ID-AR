@@ -39,8 +39,11 @@
                 <h4>Nomor Halaman : {{kitab.no_halaman}}</h4>
                 <hr class="my-4">
                 <h4>Teks</h4>
-                <p>{{kitab.teks_processing}}</h4>
+                <h4>{{kitab.teks_processing}}</h4>
                 <br>
+                <form action="/action_page.php">
+                    <input type="checkbox" id="relevan" name="relevan" value="relevan">
+                    <label for="relevan">Relevan</label><br>
 		</div>
             </div>
         {% endfor %}
